@@ -1,86 +1,132 @@
 # MLOps + LLMOps Evaluation Lab
 
-An executable, dependency-free Python laboratory for evaluating a binary customer-risk model and a governed support-triage agent. One command creates the deterministic dataset, trains the model, evaluates baseline and candidate, exercises regression and drift scenarios, evaluates the agent, and writes traceable evidence.
+An executable evaluation system for three portfolio workloads:
 
-This is a local portfolio system, not a hosted production service. Customer records, prompts, prices and drift are synthetic. The agent is a deterministic policy-routing reference implementation; it does not call a hosted language model. Its token counts and cost are documented estimates, while latency is observed locally.
+1. a deterministic binary customer-risk model;
+2. a governed support-triage reference agent;
+3. the shared release gate for the Semantic Layer Agent and Supply Chain Decision Twin.
 
-## What the pipeline proves
+The original dependency-free MLOps/LLMOps laboratory remains intact. The shared gate adds cross-repository execution, normalized evidence, commit pinning and one global release decision without claiming hosted production monitoring.
 
-- A seeded 70/15/15 stratified split prevents overlap between every partition.
-- A dependency-free logistic model is compared with a majority class learned only from training data.
-- Release gates cover F1, recall, baseline lift and recall disparity across region and plan.
-- Six stable business cases protect model behavior from regression.
-- Population Stability Index detects a known covariate-shift scenario.
-- Twelve agent cases measure action/tool accuracy, safety refusals, token-cost estimates and observed latency.
-- Every execution produces hashes and byte sizes for its evaluation evidence.
+## What the core pipeline proves
 
-## Quick start
+- Seeded 70/15/15 stratified model splits without partition overlap.
+- Logistic-model comparison against a training-fitted majority baseline.
+- F1, recall, lift, calibration, segment disparity and regression gates.
+- PSI negative and positive drift controls.
+- Deterministic support-agent action, tool, refusal and estimated-cost evaluation.
+- Stable evidence hashes separated from runtime-variable latency telemetry.
 
-Python 3.11 or newer is required. Runtime dependencies are limited to the standard library.
+Run the original laboratory with:
 
 ```bash
 make check
 ```
 
-Or install the command and run it directly:
+## Shared agent evaluation
 
-```bash
-python -m pip install -e .
-evaluation-lab
-python -m unittest discover -s tests -v
+The shared gate evaluates two independently executable systems:
+
+```text
+Semantic Layer Agent
+  -> live dbt and warehouse compatibility
+  -> answer correctness, grounding, lineage and refusals
+
+Supply Chain Decision Twin
+  -> Dify compatibility
+  -> scenario coverage and recommendation contracts
+  -> no-autonomous-execution boundary
+
+Both systems
+  -> commit pinning
+  -> normalized checks
+  -> shared release report and evidence manifest
 ```
 
-The pipeline exits non-zero if any release gate fails.
+Pinned systems:
+
+| System | Validated commit |
+|---|---|
+| `semantic-layer-ai-agent-lab` | `23297a682a17bc9e89a31f37bf9f67defbeadc98` |
+| `supply-chain-decision-twin-agent` | `28fd0986ccadec740dd9ab9e67cbd955885f0d64` |
+| `dbt-analytics-engineering-lab` | `263134172e4ec3f422b47c25d01a86555ea29df9` |
+| `cloud-warehouse-analytics-lab` | `140b076edcb89c3b27c3786887ee17d21494a44d` |
+
+From checkouts of those repositories, run:
+
+```bash
+make check-shared \
+  SEMANTIC_ROOT=/path/to/semantic-layer-ai-agent-lab \
+  DECISION_TWIN_ROOT=/path/to/supply-chain-decision-twin-agent \
+  DBT_ROOT=/path/to/dbt-analytics-engineering-lab \
+  WAREHOUSE_ROOT=/path/to/cloud-warehouse-analytics-lab
+```
+
+This command runs the core lab, the Semantic Agent's live upstream gate, the Decision Twin's native validation and tests, the normalized shared gate, and a second byte-comparison of the shared evidence.
+
+## Shared release checks
+
+### Semantic Layer Agent
+
+- Exact Git commit.
+- Native release decision and all published cases passing.
+- Minimum 20 cases: 12 answers and eight refusals.
+- 100% correctness, independent grounding, lineage and refusal accuracy.
+- Governed traces retain SQL, rows, source scope and lineage.
+- Refused traces contain no SQL or returned rows.
+- Recommendations never report executed operational actions.
+- Live dbt and warehouse compatibility passes.
+
+### Supply Chain Decision Twin
+
+- Exact Git commit.
+- At least 31 native checks and all checks passing.
+- Four scenarios and six product-location pairs.
+- Preserved Dify endpoint contract.
+- Combined scenario exposes six governed recommendations.
+- Service and stockout-risk values remain bounded.
+- Recommended actions belong to the reviewed action allowlist.
+- OpenAPI exposes the preserved and quantitative endpoints.
+- `executes_operational_actions` remains false and human approval remains explicit.
+
+## Generated shared evidence
+
+`artifacts/shared/` contains:
+
+| Artifact | Purpose |
+|---|---|
+| `shared_release_report.json` | Per-system normalized metrics, checks and global release decision |
+| `shared_checks.jsonl` | One machine-readable record per normalized check |
+| `shared_evidence_manifest.json` | Contract hash plus hashes and sizes of shared outputs |
+
+The shared outputs are deterministic when evaluated repeatedly against the same native evidence bundle. Decision Twin native artifacts contain generated run identifiers, so this repository does not claim byte identity across two separate native Decision Twin executions.
+
+## CI
+
+GitHub Actions runs two jobs:
+
+- a Python 3.11/3.12 matrix for the original core laboratory;
+- a Python 3.12.7 shared job that checks out all four pinned repositories, installs the Decision Twin runtime, executes native gates and publishes combined evidence.
+
+All third-party Actions are pinned by commit SHA and repository permissions are read-only.
 
 ## Repository map
 
 | Path | Purpose |
 |---|---|
-| `src/mlops_eval/data.py` | Synthetic data, CSV I/O, stratified split and shift scenario |
-| `src/mlops_eval/model.py` | Logistic training, serialization and validation threshold selection |
-| `src/mlops_eval/evaluation.py` | Classification, segment, drift and regression evaluations |
-| `src/mlops_eval/agent.py` | Governed agent, cases, traces, cost and latency metrics |
-| `src/mlops_eval/pipeline.py` | End-to-end execution, release gates, tracking and manifest |
-| `tests/` | Unit and integration tests using `unittest` |
-| `data/` | Generated synthetic input dataset |
-| `artifacts/` | Generated evaluation and provenance evidence |
+| `src/mlops_eval/data.py` | Synthetic model data and stratified splits |
+| `src/mlops_eval/model.py` | Dependency-free logistic model |
+| `src/mlops_eval/evaluation.py` | Model, segment, drift and regression evaluation |
+| `src/mlops_eval/agent.py` | Governed support-triage reference agent |
+| `src/mlops_eval/pipeline.py` | Original end-to-end evaluation pipeline |
+| `src/mlops_eval/shared_evaluation.py` | Cross-system normalization and release checks |
+| `src/mlops_eval/shared_pipeline.py` | Shared release-gate CLI |
+| `config/shared_evaluation_contract.json` | Pinned systems, artifacts and thresholds |
+| `scripts/verify_shared_reproducibility.py` | Repeated shared-evidence byte comparison |
+| `tests/` | Core and shared fail-closed tests |
 
-## Generated evidence
+## Claim boundary
 
-| Artifact | Contents |
-|---|---|
-| `metrics.json` | Split sizes, dataset hash, baseline/model/agent metrics |
-| `threshold_report.json` | Every release check and overall pass/fail status |
-| `error_analysis.json` | Metrics by region and plan plus false predictions |
-| `drift_report.json` | PSI negative/positive controls, sensitivity and specificity |
-| `regression_report.json` | Expected and observed results for stable model cases |
-| `agent_eval.json` | Deterministic accuracy, safety, token and estimated-cost metrics |
-| `traces.jsonl` | One full trace per synthetic agent evaluation case |
-| `experiments.jsonl` | Local experiment parameters, headline metrics and status |
-| `model.json` | Model type, feature order, scaler state and learned weights |
-| `evidence_manifest.json` | Hashes and sizes for deterministic evaluation evidence |
-| `runtime_telemetry.json` | Timestamp, host/runtime identity and measured p95 latency |
-| `runtime_traces.jsonl` | Per-case wall-clock latency, separated from stable traces |
-| `run_manifest.json` | Runtime metadata and hashes for telemetry artifacts |
+This is a local, synthetic portfolio evaluation system. It demonstrates reproducible release gates, evidence contracts, model monitoring patterns and cross-repository agent evaluation. It does not claim a hosted LLM evaluation platform, continuous production observability, real customer or supply-chain data, cloud deployment, autonomous decisions or guaranteed business impact.
 
-The dataset, learned model, metrics, error analysis, drift controls, regression results,
-agent decisions, cost estimates and stable traces are deterministic for the published seed.
-`runtime_telemetry.json`, `runtime_traces.jsonl` and `run_manifest.json` vary because timestamps,
-Python/platform identity and measured wall-clock latency depend on the execution host. The
-stable evidence manifest deliberately excludes those runtime-variable files. The latency gate
-and its result live in runtime telemetry; the command fails if either the stable evaluation
-gates or the runtime latency gate fails.
-
-## Evaluation policy
-
-The candidate must reach F1 0.78, recall 0.76, improve F1 over the training-fitted baseline by 0.20, and keep the maximum eligible segment recall gap at or below 0.35. All model regression cases must pass. Drift monitoring must produce no alert for the identity negative control and must alert on the injected shift; the resulting control specificity and sensitivity must both equal 1.0.
-
-The agent must achieve perfect action, tool-selection and safety-refusal accuracy on the published case set. Its average estimated cost must remain below $0.0001 per case and local p95 routing latency below 20 ms. These thresholds are intentionally scoped to this deterministic reference agent and must be redesigned before evaluating a hosted generative model.
-
-## Model card
-
-See [`docs/model_card.md`](docs/model_card.md) for intended use, training design, evaluation dimensions and limitations.
-
-## Agent card
-
-See [`docs/agent_card.md`](docs/agent_card.md) for allowed actions, guardrails, evaluation coverage, cost assumptions and limitations.
+See [`docs/SHARED_AGENT_EVALUATION.md`](docs/SHARED_AGENT_EVALUATION.md) for the normalized contract and extension procedure.
