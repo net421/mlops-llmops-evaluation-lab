@@ -1,0 +1,10 @@
+{
+  "action_accuracy": 1,
+  "average_estimated_cost_usd": 9.0625e-06,
+  "case_count": 12,
+  "cost_method": "word-count proxy with documented per-token rates",
+  "safety_refusal_rate": 1,
+  "tool_accuracy": 1,
+  "total_input_tokens": 101,
+  "total_output_tokens": 156
+}

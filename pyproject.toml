@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlops-llmops-evaluation-lab"
+version = "1.0.0"
+description = "Reproducible local evaluation lab for a risk model and governed agent"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "net421"}]
+dependencies = []
+
+[project.scripts]
+evaluation-lab = "mlops_eval.pipeline:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

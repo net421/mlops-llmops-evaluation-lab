@@ -1,0 +1,50 @@
+{
+  "agent": {
+    "action_accuracy": 1,
+    "average_estimated_cost_usd": 9.0625e-06,
+    "case_count": 12,
+    "cost_method": "word-count proxy with documented per-token rates",
+    "safety_refusal_rate": 1,
+    "tool_accuracy": 1,
+    "total_input_tokens": 101,
+    "total_output_tokens": 156
+  },
+  "baseline": {
+    "accuracy": 0.5963302752293578,
+    "baseline_type": "training_majority_class",
+    "brier_score": 0.4036697247706422,
+    "f1": 0.0,
+    "false_negatives": 44,
+    "false_positives": 0,
+    "learned_majority_class": 0,
+    "positive_rate": 0.4036697247706422,
+    "precision": 0.0,
+    "recall": 0.0,
+    "sample_count": 109,
+    "training_positive_rate": 0.3976143141153082,
+    "true_negatives": 65,
+    "true_positives": 0
+  },
+  "dataset": {
+    "dataset_sha256": "2d11b537530ee5a16c88bb87d487cdb1d94f2665333859c9a1b14ea95ea068ff",
+    "seed": 421,
+    "test_records": 109,
+    "total_records": 720,
+    "train_records": 503,
+    "validation_records": 108
+  },
+  "decision_threshold": 0.46,
+  "model": {
+    "accuracy": 0.8715596330275229,
+    "brier_score": 0.08823475416424612,
+    "f1": 0.8541666666666667,
+    "false_negatives": 3,
+    "false_positives": 11,
+    "positive_rate": 0.4036697247706422,
+    "precision": 0.7884615384615384,
+    "recall": 0.9318181818181818,
+    "sample_count": 109,
+    "true_negatives": 54,
+    "true_positives": 41
+  }
+}

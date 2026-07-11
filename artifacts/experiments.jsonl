@@ -1,0 +1,1 @@
+{"metrics": {"agent_action_accuracy": 1, "brier_score": 0.08823475416424612, "test_f1": 0.8541666666666667, "test_recall": 0.9318181818181818}, "parameters": {"epochs": 650, "l2": 0.002, "learning_rate": 0.11, "seed": 421}, "run_id": "local-seed-421", "status": "pass"}

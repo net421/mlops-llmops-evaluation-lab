@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "case_id": "REG-1",
+      "expected": 0,
+      "passed": true,
+      "prediction": 0,
+      "probability": 3.2e-05
+    },
+    {
+      "case_id": "REG-2",
+      "expected": 0,
+      "passed": true,
+      "prediction": 0,
+      "probability": 0.000339
+    },
+    {
+      "case_id": "REG-3",
+      "expected": 1,
+      "passed": true,
+      "prediction": 1,
+      "probability": 1.0
+    },
+    {
+      "case_id": "REG-4",
+      "expected": 1,
+      "passed": true,
+      "prediction": 1,
+      "probability": 1.0
+    },
+    {
+      "case_id": "REG-5",
+      "expected": 0,
+      "passed": true,
+      "prediction": 0,
+      "probability": 0.001935
+    },
+    {
+      "case_id": "REG-6",
+      "expected": 1,
+      "passed": true,
+      "prediction": 1,
+      "probability": 1.0
+    }
+  ],
+  "pass_rate": 1.0,
+  "passed": 6,
+  "total": 6
+}

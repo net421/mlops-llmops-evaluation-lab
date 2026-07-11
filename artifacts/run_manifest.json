@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-07-11T06:37:14.797791+00:00",
+  "pipeline_status": "pass",
+  "platform": "Linux-6.12.47-x86_64-with-glibc2.39",
+  "python": "3.12.13",
+  "runtime_artifacts": {
+    "runtime_telemetry.json": {
+      "bytes": 398,
+      "sha256": "a06568d363317a2902d1a6506a27489290d26c7a595c44b52f37060a9ed28798"
+    },
+    "runtime_traces.jsonl": {
+      "bytes": 624,
+      "sha256": "9973d0d0e13e0b50649994372b853bf1802ce955bb1e693644d30ae2a2e164f4"
+    }
+  },
+  "stable_evidence_manifest_sha256": "e5d296891f08520abd32f3ae30790d8981273dece88e18f17a8703de5ddefbba"
+}

@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "agent_eval.json": {
+      "bytes": 269,
+      "sha256": "361e1b1e0ac2e6d9245a0a906997bd5e099998a2f0536470e71c4a239f9f501e"
+    },
+    "drift_report.json": {
+      "bytes": 930,
+      "sha256": "987bf264c65ff4320d62eeb3a45c4f2aceb0bfde66e03a05b3f673e8c9a1f2f7"
+    },
+    "error_analysis.json": {
+      "bytes": 5147,
+      "sha256": "76ac66b7c24610836f42fec0eed8eaf7663456c5115994d6a8c19007feebebc0"
+    },
+    "experiments.jsonl": {
+      "bytes": 270,
+      "sha256": "aa306646eb1857858a1a09f6bc701546badb978cee1cc95b81e205ea4674e3e3"
+    },
+    "metrics.json": {
+      "bytes": 1383,
+      "sha256": "ffeb374dd9f90a1442535d78bd8a1ae01a25bda40d51fb40accf62f139fe51ee"
+    },
+    "model.json": {
+      "bytes": 978,
+      "sha256": "b5df7ffc076c860eda324dfbd31a1f58fb47fbd1c62b5d65569e912b3bff6939"
+    },
+    "regression_report.json": {
+      "bytes": 863,
+      "sha256": "a672092a0866fb98a6528f1391d62db9f7a71f63e92041f383e2f21a56f1edb5"
+    },
+    "threshold_report.json": {
+      "bytes": 908,
+      "sha256": "5a55cad60136c28cddb1e101f5f6e52c06a9d5ca48e97e59bdabfe9a14bdca92"
+    },
+    "traces.jsonl": {
+      "bytes": 4733,
+      "sha256": "805a7d66ca0c8cf1b9fe7c31767c2e9053e2df8ae80dee537a9e9c55ccdb87f6"
+    }
+  },
+  "dataset_sha256": "2d11b537530ee5a16c88bb87d487cdb1d94f2665333859c9a1b14ea95ea068ff",
+  "manifest_type": "deterministic_evaluation_evidence",
+  "pipeline_status": "pass"
+}

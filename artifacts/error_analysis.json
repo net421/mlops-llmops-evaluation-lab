@@ -1,0 +1,215 @@
+{
+  "error_count": 14,
+  "errors": [
+    {
+      "customer_id": "C00117",
+      "label": 0,
+      "plan": "pro",
+      "prediction": 1,
+      "probability": 0.528258,
+      "region": "south"
+    },
+    {
+      "customer_id": "C00246",
+      "label": 0,
+      "plan": "premium",
+      "prediction": 1,
+      "probability": 0.59221,
+      "region": "south"
+    },
+    {
+      "customer_id": "C00655",
+      "label": 0,
+      "plan": "basic",
+      "prediction": 1,
+      "probability": 0.529702,
+      "region": "north"
+    },
+    {
+      "customer_id": "C00277",
+      "label": 1,
+      "plan": "pro",
+      "prediction": 0,
+      "probability": 0.40074,
+      "region": "north"
+    },
+    {
+      "customer_id": "C00459",
+      "label": 0,
+      "plan": "basic",
+      "prediction": 1,
+      "probability": 0.677038,
+      "region": "west"
+    },
+    {
+      "customer_id": "C00138",
+      "label": 0,
+      "plan": "pro",
+      "prediction": 1,
+      "probability": 0.790317,
+      "region": "west"
+    },
+    {
+      "customer_id": "C00103",
+      "label": 1,
+      "plan": "pro",
+      "prediction": 0,
+      "probability": 0.317009,
+      "region": "east"
+    },
+    {
+      "customer_id": "C00699",
+      "label": 0,
+      "plan": "premium",
+      "prediction": 1,
+      "probability": 0.52165,
+      "region": "north"
+    },
+    {
+      "customer_id": "C00186",
+      "label": 1,
+      "plan": "pro",
+      "prediction": 0,
+      "probability": 0.420519,
+      "region": "east"
+    },
+    {
+      "customer_id": "C00386",
+      "label": 0,
+      "plan": "pro",
+      "prediction": 1,
+      "probability": 0.640332,
+      "region": "north"
+    },
+    {
+      "customer_id": "C00540",
+      "label": 0,
+      "plan": "basic",
+      "prediction": 1,
+      "probability": 0.550541,
+      "region": "north"
+    },
+    {
+      "customer_id": "C00372",
+      "label": 0,
+      "plan": "pro",
+      "prediction": 1,
+      "probability": 0.744948,
+      "region": "south"
+    },
+    {
+      "customer_id": "C00144",
+      "label": 0,
+      "plan": "pro",
+      "prediction": 1,
+      "probability": 0.63732,
+      "region": "west"
+    },
+    {
+      "customer_id": "C00305",
+      "label": 0,
+      "plan": "pro",
+      "prediction": 1,
+      "probability": 0.727118,
+      "region": "north"
+    }
+  ],
+  "max_segment_recall_gap": 0.1875,
+  "segments": {
+    "plan": {
+      "basic": {
+        "accuracy": 0.9361702127659575,
+        "brier_score": 0.06066341327468402,
+        "f1": 0.9361702127659575,
+        "false_negatives": 0,
+        "false_positives": 3,
+        "positive_rate": 0.46808510638297873,
+        "precision": 0.88,
+        "recall": 1.0,
+        "sample_count": 47,
+        "true_negatives": 22,
+        "true_positives": 22
+      },
+      "premium": {
+        "accuracy": 0.875,
+        "brier_score": 0.07551658922530874,
+        "f1": 0.8571428571428571,
+        "false_negatives": 0,
+        "false_positives": 2,
+        "positive_rate": 0.375,
+        "precision": 0.75,
+        "recall": 1.0,
+        "sample_count": 16,
+        "true_negatives": 8,
+        "true_positives": 6
+      },
+      "pro": {
+        "accuracy": 0.8043478260869565,
+        "brier_score": 0.12082918157364649,
+        "f1": 0.742857142857143,
+        "false_negatives": 3,
+        "false_positives": 6,
+        "positive_rate": 0.34782608695652173,
+        "precision": 0.6842105263157895,
+        "recall": 0.8125,
+        "sample_count": 46,
+        "true_negatives": 24,
+        "true_positives": 13
+      }
+    },
+    "region": {
+      "east": {
+        "accuracy": 0.9393939393939394,
+        "brier_score": 0.06944101666655346,
+        "f1": 0.923076923076923,
+        "false_negatives": 2,
+        "false_positives": 0,
+        "positive_rate": 0.42424242424242425,
+        "precision": 1.0,
+        "recall": 0.8571428571428571,
+        "sample_count": 33,
+        "true_negatives": 19,
+        "true_positives": 12
+      },
+      "north": {
+        "accuracy": 0.7777777777777778,
+        "brier_score": 0.10542613255614781,
+        "f1": 0.6666666666666665,
+        "false_negatives": 1,
+        "false_positives": 5,
+        "positive_rate": 0.25925925925925924,
+        "precision": 0.5454545454545454,
+        "recall": 0.8571428571428571,
+        "sample_count": 27,
+        "true_negatives": 15,
+        "true_positives": 6
+      },
+      "south": {
+        "accuracy": 0.8846153846153846,
+        "brier_score": 0.08319567195178079,
+        "f1": 0.8695652173913044,
+        "false_negatives": 0,
+        "false_positives": 3,
+        "positive_rate": 0.38461538461538464,
+        "precision": 0.7692307692307693,
+        "recall": 1.0,
+        "sample_count": 26,
+        "true_negatives": 13,
+        "true_positives": 10
+      },
+      "west": {
+        "accuracy": 0.8695652173913043,
+        "brier_score": 0.10071485235409876,
+        "f1": 0.896551724137931,
+        "false_negatives": 0,
+        "false_positives": 3,
+        "positive_rate": 0.5652173913043478,
+        "precision": 0.8125,
+        "recall": 1.0,
+        "sample_count": 23,
+        "true_negatives": 7,
+        "true_positives": 13
+      }
+    }
+  }
+}

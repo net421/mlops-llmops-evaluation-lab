@@ -1,0 +1,16 @@
+{
+  "agent": {
+    "latency_method": "local wall-clock duration for deterministic policy routing",
+    "p95_observed_latency_ms": 0.007381
+  },
+  "checks": {
+    "agent_latency": true
+  },
+  "generated_at": "2026-07-11T06:37:14.797791+00:00",
+  "platform": "Linux-6.12.47-x86_64-with-glibc2.39",
+  "python": "3.12.13",
+  "status": "pass",
+  "thresholds": {
+    "maximum_p95_latency_ms": 20.0
+  }
+}

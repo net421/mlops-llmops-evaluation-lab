@@ -1,0 +1,34 @@
+{
+  "alert_threshold": 0.2,
+  "control_sensitivity": 1.0,
+  "control_specificity": 1.0,
+  "method": "population_stability_index",
+  "negative_control": {
+    "alert_threshold": 0.2,
+    "drift_detected": false,
+    "expected_drift": false,
+    "features": {
+      "late_payments": 0.0,
+      "tenure_months": 0.0,
+      "tickets_90d": 0.0,
+      "usage_score": 0.0
+    },
+    "max_psi": 0.0,
+    "method": "population_stability_index",
+    "scenario": "identity copy; no distribution shift"
+  },
+  "shifted_control": {
+    "alert_threshold": 0.2,
+    "drift_detected": true,
+    "expected_drift": true,
+    "features": {
+      "late_payments": 8.398334835420629,
+      "tenure_months": 0.0,
+      "tickets_90d": 9.756150261818018,
+      "usage_score": 2.2162964899383497
+    },
+    "max_psi": 9.756150261818018,
+    "method": "population_stability_index",
+    "scenario": "usage -24, tickets +2, late payments +1 (bounded)"
+  }
+}
