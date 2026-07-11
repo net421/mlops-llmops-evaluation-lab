@@ -1,0 +1,58 @@
+{
+  "contract_version": "1.0.0",
+  "systems": {
+    "semantic_agent": {
+      "repository": "net421/semantic-layer-ai-agent-lab",
+      "commit_sha": "23297a682a17bc9e89a31f37bf9f67defbeadc98",
+      "native_validation": "make verify-live",
+      "artifacts": {
+        "evaluation": "artifacts/evaluation_results.json",
+        "traces": "artifacts/agent_traces.jsonl",
+        "manifest": "artifacts/artifact_manifest.json",
+        "live_upstream": "artifacts/live_upstream_validation.json"
+      },
+      "thresholds": {
+        "minimum_case_count": 20,
+        "minimum_answer_case_count": 12,
+        "minimum_refusal_case_count": 8,
+        "minimum_correctness_rate": 1.0,
+        "minimum_grounding_rate": 1.0,
+        "minimum_lineage_accuracy": 1.0,
+        "minimum_refusal_accuracy": 1.0,
+        "maximum_total_estimated_cost_usd": 0.01
+      }
+    },
+    "decision_twin": {
+      "repository": "net421/supply-chain-decision-twin-agent",
+      "commit_sha": "28fd0986ccadec740dd9ab9e67cbd955885f0d64",
+      "native_validation": "make verify",
+      "artifacts": {
+        "validation": "artifacts/decision_twin_validation.json",
+        "combined_scenario": "artifacts/combined_scenario_recommendations.json",
+        "openapi": "artifacts/openapi.json"
+      },
+      "thresholds": {
+        "minimum_checks_passed": 31,
+        "required_scenario_count": 4,
+        "required_product_location_pairs": 6,
+        "maximum_total_incremental_cost": 1000000.0,
+        "allowed_actions": [
+          "no_action",
+          "expedite_inbound_review",
+          "inventory_transfer_review",
+          "planned_replenishment_review"
+        ]
+      }
+    }
+  },
+  "semantic_upstreams": {
+    "dbt": {
+      "repository": "net421/dbt-analytics-engineering-lab",
+      "commit_sha": "263134172e4ec3f422b47c25d01a86555ea29df9"
+    },
+    "warehouse": {
+      "repository": "net421/cloud-warehouse-analytics-lab",
+      "commit_sha": "140b076edcb89c3b27c3786887ee17d21494a44d"
+    }
+  }
+}

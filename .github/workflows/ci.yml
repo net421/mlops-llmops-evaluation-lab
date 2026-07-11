@@ -1,28 +1,91 @@
 name: evaluation-lab-ci
 
 on:
-  push:
   pull_request:
+  push:
+    branches: [main]
 
 permissions:
   contents: read
 
 jobs:
-  validate:
+  core-evaluation:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Check out evaluation lab
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Set up Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m pip install --upgrade pip
-      - run: python -m pip install -e .
-      - run: make check
-      - uses: actions/upload-artifact@v4
+      - name: Install evaluation lab
+        run: python -m pip install -e .
+      - name: Run core MLOps and LLMOps evaluation
+        run: make check
+      - name: Upload core evaluation evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: evaluation-artifacts-python-${{ matrix.python-version }}
+          name: core-evaluation-python-${{ matrix.python-version }}
           path: artifacts/
+          if-no-files-found: error
 
+  shared-agent-evaluation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out evaluation lab
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Check out pinned Semantic Agent
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: net421/semantic-layer-ai-agent-lab
+          ref: 23297a682a17bc9e89a31f37bf9f67defbeadc98
+          path: _systems/semantic-agent
+          persist-credentials: false
+      - name: Check out pinned Decision Twin
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: net421/supply-chain-decision-twin-agent
+          ref: 28fd0986ccadec740dd9ab9e67cbd955885f0d64
+          path: _systems/decision-twin
+          persist-credentials: false
+      - name: Check out pinned dbt models
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: net421/dbt-analytics-engineering-lab
+          ref: 263134172e4ec3f422b47c25d01a86555ea29df9
+          path: _systems/dbt
+          persist-credentials: false
+      - name: Check out pinned warehouse models
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          repository: net421/cloud-warehouse-analytics-lab
+          ref: 140b076edcb89c3b27c3786887ee17d21494a44d
+          path: _systems/warehouse
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38
+        with:
+          python-version: "3.12.7"
+      - name: Install evaluation and Decision Twin runtimes
+        run: |
+          python -m pip install -e .
+          python -m pip install -r _systems/decision-twin/requirements.txt
+      - name: Run shared native and release gates
+        run: |
+          make check-shared \
+            SEMANTIC_ROOT="$GITHUB_WORKSPACE/_systems/semantic-agent" \
+            DECISION_TWIN_ROOT="$GITHUB_WORKSPACE/_systems/decision-twin" \
+            DBT_ROOT="$GITHUB_WORKSPACE/_systems/dbt" \
+            WAREHOUSE_ROOT="$GITHUB_WORKSPACE/_systems/warehouse"
+      - name: Upload shared evaluation evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: shared-agent-evaluation-evidence
+          path: |
+            artifacts/
+            _systems/semantic-agent/artifacts/
+            _systems/decision-twin/artifacts/
+          if-no-files-found: error
